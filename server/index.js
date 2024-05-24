@@ -16,7 +16,7 @@ const corsOptions = {
     origin: (origin, callback) => {
         const allowedOrigin = [
             "http://localhost:3000",
-            "https://roamly-one.vercel.app"
+            "https://web-roamly.vercel.app"
         ];
         const isAllowed = allowedOrigin.includes(origin);
         callback(null, isAllowed ? origin : false);
