@@ -11,7 +11,7 @@ const Hero = () => {
   const [selectedConcrete, setSelectedConcrete] = useState("Electronics");
   const [selectedAbstract, setSelectedAbstract] = useState("Emotions and Feelings");
 
-  const HTTP = "https://roamly-ten.vercel.app/chat";
+  const HTTP = "https://api-roamly.vercel.app/chat";
 
   const handleSubmit = () => {
     setLoader(true);
