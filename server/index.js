@@ -16,7 +16,7 @@ const corsOptions = {
     origin: (origin, callback) => {
         const allowedOrigin = [
             "http://localhost:3000",
-            "https://web-roamly.vercel.app"
+            "https://roamly-one.vercel.app"
         ];
         const isAllowed = allowedOrigin.includes(origin);
         callback(null, isAllowed ? origin : false);
@@ -31,7 +31,7 @@ app.post("/chat", async (req, res) => {
     const { prompt } = req.body;
     try {
         const completion = await openai.chat.completions.create({
-            messages: [{ role: 'user', content: `${prompt} max 12 words` }],
+            messages: [{ role: 'user', content: `Generate a surprising, imaginative, light-hearted, and contradicting prompt that encourages lateral, playful, and imaginative thinking. It should be a simple, introspective statement, maximum 10 words, based on the provided concepts. Avoid instructions, overly complex ideas, and ensure grammatical correctness. ${prompt},` }],
             model: 'gpt-3.5-turbo',
         });
         res.send(completion.choices[0].message);
