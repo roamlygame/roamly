@@ -36,12 +36,7 @@ const Hero = () => {
     setRandomAbstract(randomAbstractWord);
     setRandomConcrete(randomConcreteWord);
 
-    const newPrompt = `Generate a surprising, imaginative, light-hearted, and contradicting prompt that encourages lateral, playful, and imaginative thinking using the provided abstract and concrete concepts dataset. 
-    Make sure to must must include the following exact words without changing them: 
-    word concrete = ${randomConcreteWord}, 
-    word abstract = ${randomAbstractWord}.
-    it should be just a simple sentence. maximuim 150 characters
-    `;
+    const newPrompt = `Make sure to must must include the following exact words without changing them:  word concrete = ${randomConcreteWord}, word abstract = ${randomAbstractWord}.`;
 
     axios
       .post(`${HTTP}`, { prompt: newPrompt })
@@ -65,38 +60,38 @@ const Hero = () => {
   }, []);
 
   const renderWords = (a) => {
+    // Remove double quotes from the input sentence
+    const sanitizedInput = a.replace(/"/g, '');
+
     const escapeRegex = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const concretePattern = new RegExp(`(${escapeRegex(randomConcrete.toLowerCase())}[^\\s]*)`, 'g');
     const abstractPattern = new RegExp(`(${escapeRegex(randomAbstract.toLowerCase())}[^\\s]*)`, 'g');
 
-    const concreteReplacement = `<span class="bg-yellow_900 inline-block text-black rounded-[12px] md:rounded-[20px] px-[10px] py-[10px] md:py-[2px] f-dmmono-r text-4xl leading-[40px] md:text-[80px] md:leading-[80px] my-[6px] md:my-1 mr-1">$1</span>`;
+    const concreteReplacement = `<span class="bg-yellow_900 inline-block text-black rounded-[12px] md:rounded-[20px] px-[10px] py-[10px] md:py-[2px] f-dmmono-r  text-4xl leading-[40px] md:text-[80px] md:leading-[80px] my-[6px] md:my-1 mr-1">$1</span>`;
     const abstractReplacement = `<span class="bg-purple_700 inline-block text-white rounded-[12px] md:rounded-[20px] px-[10px] py-[10px] md:py-[2px] f-dmmono-r text-4xl leading-[40px] md:text-[80px] md:leading-[80px] my-[6px] md:my-1">$1</span>`;
 
-    const text = a
+    const text = sanitizedInput
       .replace(concretePattern, concreteReplacement)
       .replace(abstractPattern, abstractReplacement);
 
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
-
   return (
     <section className="pt-14 md:pt-[120px] mb-40 md:mb-[378px] w-full px-4">
       <div className="max-w-[1300px] w-full mx-auto flex flex-col lmd:flex-row gap-10 md:gap-20">
         <div className="w-full lmd:w-[60%]">
           {loader ? (
             <div role="status" className="w-full space-y-4 md:space-x-8 animate-pulse">
-              <div className="h-6 md:h-10 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-1 md:mb-2"></div>
+              <div className="h-6 md:h-10 bg-gray-200 rounded-full dark:bg-gray-700  mb-1 md:mb-2"></div>
+              <div className="h-6 md:h-10 bg-gray-200 rounded-full dark:bg-gray-700  mb-1 md:mb-2"></div>
               <div className="h-6 md:h-10 bg-gray-200 rounded-full dark:bg-gray-700 mb-1 md:mb-2"></div>
-              <div className="h-6 md:h-10 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-1 md:mb-2"></div>
               <div className="h-6 md:h-10 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-1 md:mb-2"></div>
               <div className="h-6 md:h-10 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
             </div>
           ) : (
-            <h1 className="text-black_900 text-center xmd:text-start f-anvenirnext-m text-4xl leading-[40px] md:text-[80px] md:leading-[80px] flex gap-2 flex-wrap">
-              <div
-                dangerouslySetInnerHTML={{ __html: response ? renderWords(response) : "" }}
-              />
-            </h1>
+            <h1 className="text-black_900 text-center xmd:text-start f-anvenirnext-m text-4xl leading-[40px] md:text-[80px] md:leading-[80px] "
+              dangerouslySetInnerHTML={{ __html: response ? renderWords(response) : "" }}
+            />
           )}
         </div>
         <div className="flex-1 w-full lmd:w-[40%] flex justify-center lmd:justify-end">
