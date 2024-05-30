@@ -31,10 +31,7 @@ app.post("/chat", async (req, res) => {
     const { prompt } = req.body;
     try {
         const completion = await openai.chat.completions.create({
-            messages: [{ 
-                role: 'user', 
-                content: `Generate a surprising, imaginative, light-hearted, and contradicting question that encourages lateral, playful, and imaginative thinking. It should be a simple, introspective question, maximum 12 words, based on the provided concepts. Avoid instructions, overly complex ideas, and ensure grammatical correctness. Example concepts: ${prompt}`
-            }],
+            messages: [{ role: 'user', content: `Generate a surprising, imaginative, light-hearted, and contradicting prompt that encourages lateral, playful, and imaginative thinking. It should involve combining an abstract concept with a concrete object to create a whimsical scenario. Here is an example: "Imagine a world where toasters are the epitome of beauty. Create a short story or poem that explores the idea of finding profound beauty in the everyday object of a toaster." max 12 words,  Now, based on the provided concepts, create a similar prompt: ${prompt}` }],
             model: 'gpt-3.5-turbo',
         });
         res.send(completion.choices[0].message);
