@@ -36,7 +36,8 @@ const Hero = () => {
     setRandomAbstract(randomAbstractWord);
     setRandomConcrete(randomConcreteWord);
 
-    const newPrompt = `Make sure to must must include the following exact words without changing them:  word concrete = ${randomConcreteWord}, word abstract = ${randomAbstractWord}.`;
+    // const newPrompt = `Make sure to must must include the following exact words without changing them:  word concrete = ${randomConcreteWord}, word abstract = ${randomAbstractWord}.`;
+    const newPrompt = `Imagine a scenario where ${randomConcreteWord} embodies ${randomAbstractWord}.`;
 
     axios
       .post(`${HTTP}`, { prompt: newPrompt })
