@@ -32,7 +32,7 @@ app.post("/chat", async (req, res) => {
     try {
         const completion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: `Generate a surprising, imaginative, light-hearted, and contradicting prompt that encourages lateral, playful, and imaginative thinking. It should be a simple, introspective statement, maximum 10 words, based on the provided concepts. Avoid instructions, overly complex ideas, and ensure grammatical correctness. Imagine a scenario where ${prompt}.` }],
-            model: 'gpt-4o',
+            model: 'gpt-3.5-turbo',
         });
         res.send(completion.choices[0].message);
     } catch (error) {
